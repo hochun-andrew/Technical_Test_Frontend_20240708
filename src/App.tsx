@@ -24,7 +24,7 @@ interface TableParams {
 const { TextArea } = Input;
 
 const App: React.FC = () => {
-  const apiURL = import.meta.env.VITE_API_URL + ':' + import.meta.env.VITE_API_PORT;
+  const apiURL = process.env.VITE_API_URL + ':' + process.env.VITE_API_PORT;
 
   const [data, setData] = useState<DataType[]>();
   const [loading, setLoading] = useState(false);
