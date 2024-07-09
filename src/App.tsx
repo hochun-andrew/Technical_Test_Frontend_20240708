@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
-import type { GetProp, TableProps, PopconfirmProps } from 'antd';
+import type { GetProp, TableProps } from 'antd';
 import { Space, Typography, Table, Button, Flex, message, Popconfirm, Modal, Form, Input } from 'antd';
 import type { SorterResult } from 'antd/es/table/interface';
 
@@ -8,7 +8,7 @@ type ColumnsType<T> = TableProps<T>['columns'];
 type TablePaginationConfig = Exclude<GetProp<TableProps, 'pagination'>, boolean>;
 
 interface DataType {
-  uuid: number;
+  id: number;
   name: string;
   gender: string;
   email: string;
@@ -40,12 +40,12 @@ const App: React.FC = () => {
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalAdd, setIsModalAdd] = useState(true);
-  const showAddModal = (record) => {
+  const showAddModal = () => {
     setIsModalAdd(true);
     form.resetFields();
     setIsModalOpen(true);
   };
-  const showEditModal = (record) => {
+  const showEditModal = (record: DataType) => {
     setIsModalAdd(false);
     form.setFieldsValue({ id: record.id, name: record.name });
     setIsModalOpen(true);
@@ -65,7 +65,7 @@ const App: React.FC = () => {
 
   const fetchData = () => {
     setLoading(true);
-    fetch(apiURL + `/duty/list/` + tableParams.pagination.current + `/` + tableParams.pagination.pageSize + (tableParams.sortField === undefined ? '' : `/` + tableParams.sortField + (tableParams.sortOrder === undefined ? '' : '/' + tableParams.sortOrder)))
+    fetch(apiURL + `/duty/list/` + tableParams.pagination?.current + `/` + tableParams.pagination?.pageSize + (tableParams.sortField === undefined ? '' : `/` + tableParams.sortField + (tableParams.sortOrder === undefined ? '' : '/' + tableParams.sortOrder)))
       .then((res) => res.json())
       .then(({ results, totalCount }) => {
         setData(results);
@@ -80,7 +80,7 @@ const App: React.FC = () => {
       });
   };
 
-  const addDuty = (name) => {
+  const addDuty = (name: string) => {
     setLoading(true);
     const data = new URLSearchParams();
     data.append('name', name);
@@ -94,13 +94,12 @@ const App: React.FC = () => {
       });
   };
 
-  const updateDuty = (id, name) => {
+  const updateDuty = (id: number, name: string) => {
     setLoading(true);
     const data = new URLSearchParams();
     data.append('name', name);
     fetch(apiURL + `/duty/update/` + id, { method: 'PUT', body: data })
-      .then((res) => res.json())
-      .then(({ result }) => {
+      .then(() => {
         setLoading(false);
         message.success('Duty ' + id + ' updated');
         form.resetFields();
@@ -108,19 +107,14 @@ const App: React.FC = () => {
       });
   };
 
-  const deleteDuty = (id) => {
+  const deleteDuty = (id: number) => {
     setLoading(true);
     fetch(apiURL + `/duty/delete/` + id, { method: 'DELETE' })
-      .then((res) => res.json())
-      .then(({ result }) => {
+      .then(() => {
         setLoading(false);
         message.success('Duty ' + id + ' deleted');
         fetchData();
       });
-  };
-
-  const confirmDelete: PopconfirmProps['onConfirm'] = (id) => {
-    deleteDuty(id);
   };
 
   const columns: ColumnsType<DataType> = [
@@ -136,7 +130,7 @@ const App: React.FC = () => {
           <Popconfirm
             title="Delete Duty"
             description="Confirm to delete this duty?"
-            onConfirm={() => confirmDelete(id)}
+            onConfirm={() => deleteDuty(id)}
             okText="OK"
             cancelText="Cancel"
           >
