@@ -86,9 +86,10 @@ const App: React.FC = () => {
     data.append('name', name);
     fetch(apiURL + `/duty/create`, { method: 'POST', body: data })
       .then((res) => res.json())
-      .then(({ result }) => {
+      .then((result) => {
+console.log(result);
         setLoading(false);
-        message.success('Duty ' + result + ' added');
+        message.success('Duty ' + result.id + ' added');
         form.resetFields();
         fetchData();
       });
