@@ -45,7 +45,7 @@ $ npm run test
   Add with validation
   <p>
     <img src='/screenshots/04_add.png' width='48%' alt="Add with validation">
-    <img src='/screenshots/02_list_pagination.png' width='48%' alt='Add success'>
+    <img src='/screenshots/05_add_success.png' width='48%' alt='Add success'>
   </p>
   
   Edit with validation
