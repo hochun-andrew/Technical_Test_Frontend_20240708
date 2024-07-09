@@ -1,30 +1,61 @@
-# React + TypeScript + Vite
+# Technical Test Frontend
+* [Quick Start](#quick-start)
+* [Running Tests](#running-tests)
+* [Screenshots](#screenshots)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Quick Start
 
-Currently, two official plugins are available:
+  Install dependencies:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```console
+$ npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+  Create a `.env` file in the root of your project
+
+```dosini
+VITE_API_URL="http://<your_backend_host>"
+VITE_API_PORT=<your_backend_port>
+```
+
+  Start the application:
+
+```console
+$ npm run dev -- --host
+```
+
+  View the website at: http://<your_frontend_host>:5173
+
+### Running Tests
+
+  Run the tests using Jest:
+
+```console
+$ npm run test
+```
+
+### Screenshots
+
+  List with pagination, sorting
+  <p>
+    <img src='/screenshots/02_list_pagination.png' width='48%' alt='List pagination'>
+    <img src='/screenshots/03_list_sorting.png' width='48%' alt='List sorting'>
+  </p>
+
+  Add with validation
+  <p>
+    <img src='/screenshots/04_add.png' width='48%' alt="Add with validation">
+    <img src='/screenshots/02_list_pagination.png' width='48%' alt='Add success'>
+  </p>
+  
+  Edit with validation
+  <p>
+    <img src='/screenshots/06_edit.png' width='48%' alt="Edit with validation">
+    <img src='/screenshots/07_edit_success.png' width='48%' alt='Edit success'>
+  </p>
+  
+  Delete
+  <p>
+    <img src='/screenshots/08_delete.png' width='48%' alt="Delete">
+    <img src='/screenshots/09_delete_success.png' width='48%' alt='Delete success'>
+  </p>
